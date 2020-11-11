@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>关于 | Gridea</title>
+<title>TCP三次四次握手 | Gridea</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1605090045119">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/media/css/pisces.css">
@@ -29,7 +29,7 @@
 
 
 
-  <meta name="description" content="关于" />
+  <meta name="description" content="TCP三次四次握手" />
   <meta name="keywords" content="" />
 </head>
 
@@ -221,10 +221,9 @@
     <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
+<li><a href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">计算机网络体系结构</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AF%B9%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%88%86%E5%B1%82">为什么要对网络协议分层？</a></li>
+<li><a href="#tcpip%E5%8D%8F%E8%AE%AE%E6%97%8F">TCP/IP协议族</a></li>
 </ul>
 </li>
 </ul>
@@ -492,8 +491,8 @@
           <div class="section bg-color post post-page">
             <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://victoryfan.github.io/post/about/">
-      关于
+    <a class="post-title-link" href="https://victoryfan.github.io/post/tcp-san-ci-si-ci-wo-shou/">
+      TCP三次四次握手
     </a>
   </h1>
   <div class="post-meta">
@@ -501,30 +500,118 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2019-01-25</span>
+      <span>2020-11-11</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1分钟</span>
+      <span>5分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>31<span class="pc-show">字数</span></span>
+      <span>1400<span class="pc-show">字数</span></span>
     </span>
     
   </div>
 </header>
             <div class="post-body next-md-body" id="post_body">
-              <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+              <h2 id="计算机网络体系结构">计算机网络体系结构</h2>
+<p>在计算机网络的基本概念中，分层次的体系结构是最基本的。</p>
+<p><strong>网络协议是什么？</strong><br>
+在计算机网络要做到有条不紊地交换数据，就必须遵守一些事先约定好的规则，比如交换数据的格式、是否需要发送一个应答悉尼下。这些规则被称为网络协议。</p>
+<h2 id="为什么要对网络协议分层">为什么要对网络协议分层？</h2>
+<ul>
+<li>简化问题难度和复杂度。由于各层之间独立，我们可以分割大问题为小问题。</li>
+<li>灵活性好。当其中一层的技术发生变化，只要层间接口关系保持不变，其他层不受影响。</li>
+<li>易于实现和维护。</li>
+<li>促进标准化工作。分开后，每层功能可以相对简单地被描述。</li>
+</ul>
+<p><strong>网络协议分层的缺点：</strong> 功能可能出现在多个层里，产生了额外开销。<br>
+为了使不同体系结构的计算机网络都能互联，国际标准化组织 ISO 于1977年提出了一个试图使各种计算机在世界范围内互联成网的标准框架，即著名的开放系统互联基本参考模型 OSI/RM，简称为OSI。</p>
+<p>OSI 的七层协议体系结构的概念清楚，理论也较完整，但它既复杂又不实用，TCP/IP 体系结构则不同，但它现在却得到了非常广泛的应用。TCP/IP 是一个四层体系结构，它包含应用层，运输层，网际层和网络接口层（用网际层这个名字是强调这一层是为了解决不同网络的互连问题），不过从实质上讲，TCP/IP 只有最上面的三层，因为最下面的网络接口层并没有什么具体内容，因此在学习计算机网络的原理时往往采用折中的办法，即综合 OSI 和 TCP/IP 的优点，采用一种只有五层协议的体系结构，这样既简洁又能将概念阐述清楚，有时为了方便，也可把最底下两层称为网络接口层。</p>
+<p><strong>四层协议，五层协议和七层协议的关系如下：</strong></p>
+<ul>
+<li>TCP/IP是一个四层的体系结构，主要包括：应用层、运输层、网际层和网络接口层。</li>
+<li>五层协议的体系结构主要包括：应用层、运输层、网络层、数据链路层和物理层。</li>
+<li>OSI七层协议模型主要包括：应用层（Application）、表示层（Presentation）、会话层（Session）、运输层（Transport）、网络层（Network）、数据链路层（Data Link）、物理层（Physical）。</li>
+</ul>
+<p><em>注：</em> 五层协议的体系结构只是为了介绍网络原理而设计的，实际应用还是 TCP/IP 四层体系结构。</p>
+<h2 id="tcpip协议族">TCP/IP协议族</h2>
+<p><strong>应用层</strong><br>
+应用层( application-layer ）的任务是通过应用进程间的交互来完成特定网络应用。应用层协议定义的是应用进程（进程：主机中正在运行的程序）间的通信和交互的规则。</p>
+<p>对于不同的网络应用需要不同的应用层协议。在互联网中应用层协议很多，如域名系统 DNS，支持万维网应用的 HTTP 协议，支持电子邮件的 SMTP 协议等等。</p>
+<p><strong>运输层</strong><br>
+运输层(transport layer)的主要任务就是负责向两台主机进程之间的通信提供通用的数据传输服务。应用进程利用该服务传送应用层报文。</p>
+<p><em><strong>运输层主要使用以下两种协议：</strong></em></p>
+<ol>
+<li>传输控制协议-TCP：提供面向连接的，可靠的数据传输服务。</li>
+<li>用户数据协议-UDP：提供无连接的，尽最大努力的数据传输服务（不保证数据传输的可靠性）。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>UDP</th>
+<th>TCP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>是否连续</td>
+<td>无连接</td>
+<td>面向连接</td>
+</tr>
+<tr>
+<td>是否可靠</td>
+<td>不可靠传输，不实用流量控制和拥塞控制</td>
+<td>可靠传输，使用流量控制和拥塞控制</td>
+</tr>
+<tr>
+<td>连接对象个数</td>
+<td>支持一对一、一对多、多对一和多对多交互通信</td>
+<td>只能一对一通信</td>
+</tr>
+<tr>
+<td>传输方式</td>
+<td>面向报文</td>
+<td>面向字节流</td>
+</tr>
+<tr>
+<td>首部开销</td>
+<td>首部开销小，仅8字节</td>
+<td>首部最小20字节，最大60字节</td>
+</tr>
+<tr>
+<td>场景</td>
+<td>适用于实时应用（IP电话、视频电话、直播等）</td>
+<td>适用于要求可靠传输的应用，例如文件传输</td>
+</tr>
+</tbody>
+</table>
+<p><strong>每一个应用层（TCP/IP参考模型的最高层）协议一般都会使用到两个传输层协议之一：</strong><br>
+运行在TCP协议上的协议：</p>
+<ul>
+<li>HTTP（Hypertext Transfer Protocol，超文本传输协议），主要用于普通浏览。</li>
+<li>HTTPS（HTTP over SSL，安全超文本传输协议）,HTTP协议的安全版本。</li>
+<li>FTP（File Transfer Protocol，文件传输协议），用于文件传输。</li>
+<li>POP3（Post Office Protocol, version 3，邮局协议），收邮件用。</li>
+<li>SMTP（Simple Mail Transfer Protocol，简单邮件传输协议），用来发送电子邮件。</li>
+<li>TELNET（Teletype over the Network，网络电传），通过一个终端（terminal）登陆到网络。</li>
+<li>SSH（Secure Shell，用于替代安全性差的TELNET），用于加密安全登陆用。</li>
+</ul>
+<p>运行在UDP协议上的协议：</p>
+<ul>
+<li>BOOTP（Boot Protocol，启动协议），应用于无盘设备。</li>
+<li>NTP（Network Time Protocol，网络时间协议），用于网络同步。</li>
+<li>DHCP（Dynamic Host Configuration Protocol，动态主机配置协议），动态配置IP地址。</li>
+</ul>
+<p>运行在TCP和UDP协议上：</p>
+<ul>
+<li>DNS（Domain Name Service，域名服务），用于完成地址查找，邮件转发等工作。</li>
+</ul>
+<p><strong>网络层</strong></p>
 
             </div>
             <div class="post-footer">
@@ -535,7 +622,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://victoryfan.github.io/post/about/" title="关于">https://victoryfan.github.io/post/about/</a>
+      <a href="https://victoryfan.github.io/post/tcp-san-ci-si-ci-wo-shou/" title="TCP三次四次握手">https://victoryfan.github.io/post/tcp-san-ci-si-ci-wo-shou/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -550,6 +637,10 @@
       
     </div>
     <div class="nav-next">
+      
+        <a class="nav-pc-next" title="10个冷门但实用的Docker实用技巧" href="https://victoryfan.github.io/post/10-ge-leng-men-dan-shi-yong-de-docker-shi-yong-ji-qiao/">10个冷门但实用的Docker实用技巧</a>
+        <a class="nav-mobile-next" title="10个冷门但实用的Docker实用技巧" href="https://victoryfan.github.io/post/10-ge-leng-men-dan-shi-yong-de-docker-shi-yong-ji-qiao/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
