@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://victoryfan.github.io</id>
     <title>Gridea</title>
-    <updated>2020-11-11T07:14:55.401Z</updated>
+    <updated>2020-11-11T07:15:58.725Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://victoryfan.github.io"/>
     <link rel="self" href="https://victoryfan.github.io/atom.xml"/>
@@ -30,8 +30,8 @@ root  24419  24390   0   Nov09   ?    00:00:00     node ./src/tool/startDPeer.js
 #同时 docker load 可以把镜像从 tar 文件导入到 docker 中
 root@c02_walletnode_server_test_v_hk:~# docker load &lt; node-8.12.0.tar
 </code></pre>
-<p>###3、docker search<br>
-这个命令可以在命令行中方便的搜索 DockerHub 中的镜像，比如：</p>
+<h3 id="3-docker-search">3、docker search</h3>
+<p>这个命令可以在命令行中方便的搜索 DockerHub 中的镜像，比如：</p>
 <pre><code>root@c02_walletnode_server_test_v_hk:~# docker search nginx
 NAME                               DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
 nginx                              Official build of Nginx.                        13988               [OK]
@@ -93,8 +93,8 @@ ce426dead114        24 months ago       /bin/sh -c #(nop)  CMD [&quot;node&quot;
 &lt;missing&gt;           24 months ago       /bin/sh -c #(nop)  CMD [&quot;bash&quot;]                 0B
 &lt;missing&gt;           24 months ago       /bin/sh -c #(nop) ADD file:0b25d0012989e20b9…   127MB
 </code></pre>
-<p>###7、 docker wait<br>
-这个命令可以查看容器的退出状态，比如：</p>
+<h3 id="7-docker-wait">7、 docker wait</h3>
+<p>这个命令可以查看容器的退出状态，比如：</p>
 <pre><code>root@c02_walletnode_server_test_v_hk:~# docker wait int
 137
 </code></pre>
