@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://victoryfan.github.io</id>
-    <title>Victoryfan</title>
-    <updated>2020-11-13T09:48:06.161Z</updated>
+    <title>哈拉少</title>
+    <updated>2020-11-13T09:56:13.674Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://victoryfan.github.io"/>
     <link rel="self" href="https://victoryfan.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://victoryfan.github.io/images/avatar.png</logo>
     <icon>https://victoryfan.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Victoryfan</rights>
+    <rights>All rights reserved 2020, 哈拉少</rights>
     <entry>
         <title type="html"><![CDATA[TCP三次四次握手]]></title>
         <id>https://victoryfan.github.io/post/tcp-san-ci-si-ci-wo-shou/</id>
