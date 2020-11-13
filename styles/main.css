@@ -2195,13 +2195,13 @@ body {
     }.box-shadow-wrapper {
       box-shadow: none !important;
     }body {
-      cursor: url('/media/curs//Users/oker/Documents/Gridea/output/media/curs/Arrow.cur.cur'), default;
+      cursor: url('/media/curs/Arrow.cur'), default;
     }a {
-      cursor: pointer;
+      cursor: url('/media/curs/Link Select.cur'), pointer !important;
     }input, textarea, code {
-      cursor: text;
+      cursor: url('/media/curs/Text.cur'), text !important;
     }code > span.copy-code {
-      cursor: pointer;
+      cursor: url('/media/curs/Precision Select.cur'), text !important;
     }.post img {
       cursor: zoom-in;
     }.post img {
