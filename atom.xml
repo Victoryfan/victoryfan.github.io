@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://victoryfan.github.io</id>
     <title>哈拉少</title>
-    <updated>2020-11-16T07:11:09.945Z</updated>
+    <updated>2020-11-16T07:34:39.679Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://victoryfan.github.io"/>
     <link rel="self" href="https://victoryfan.github.io/atom.xml"/>
@@ -74,6 +74,10 @@ HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，
 </ol>
 <p>现在，当面试官再问你“GET与POST的区别”的时候，你的内心是不是开始装逼了？不过要小心被打<br>
 <img src="https://victoryfan.github.io/post-images/1605510454726.jpeg" alt="" loading="lazy"></p>
+<p>引自：</p>
+<blockquote>
+<p><a href="https://mp.weixin.qq.com/s/D36Yj_OjTLc3QURVMaEtjA">https://mp.weixin.qq.com/s/D36Yj_OjTLc3QURVMaEtjA</a></p>
+</blockquote>
 ]]></content>
     </entry>
     <entry>
