@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://victoryfan.github.io</id>
     <title>哈拉少</title>
-    <updated>2020-11-17T07:53:43.034Z</updated>
+    <updated>2020-11-17T07:55:43.575Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://victoryfan.github.io"/>
     <link rel="self" href="https://victoryfan.github.io/atom.xml"/>
@@ -107,7 +107,8 @@ false
 Exception in thread &quot;main&quot; java.lang.NullPointerException
 </code></pre>
 <p>Java8或者guava lib中，提供了Optional类，这是一个元素容器，通过它来封装对象，可以减少判空。不过代码量还是不少。不爽。</p>
-<p>如果你想返回null，请停下来想一想，这个地方是否更应该抛出一个异常。</p>
+<p>如果你想返回null，请停下来想一想，这个地方是否更应该抛出一个异常。<br>
+<img src="https://victoryfan.github.io/post-images/1605599736790.jpg" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
