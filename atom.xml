@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://victoryfan.github.io</id>
     <title>哈拉少</title>
-    <updated>2020-11-17T07:53:14.128Z</updated>
+    <updated>2020-11-17T07:53:43.034Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://victoryfan.github.io"/>
     <link rel="self" href="https://victoryfan.github.io/atom.xml"/>
@@ -95,7 +95,7 @@ else {
 <p>而不是</p>
 <pre><code>foo.equals(&quot;bar&quot;)
 </code></pre>
-<p>**原因如下例子：  **</p>
+<p><strong>原因如下例子：</strong></p>
 <pre><code> public static void main(String[] args) {
         String g = null;
         System.out.println(&quot;1&quot;.equals(g));
