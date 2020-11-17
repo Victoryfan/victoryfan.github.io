@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#82c91e">
-<title>哈拉少</title>
+<title>BigDecimal一定不会丢失精度吗？ | 哈拉少</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1605595098813">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -29,6 +29,8 @@
 
 
 
+  <meta name="description" content="BigDecimal一定不会丢失精度吗？" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -154,10 +156,25 @@
   <div class="main-continer">
     
     <div
-      class="section-layout  gemini">
+      class="section-layout gemini ">
       <div class="section-layout-wrapper">
-        <div id="sidebarMeta" class="sidebar">
-    
+        
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body gemini" id="sidebar_body">
+        
+          
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -209,70 +226,330 @@
 
 
 </div>
+          
+        
+      </div>
+    </div>
+  
 </div>
 <script>
-  let sidebarMeta = document.querySelector('#sidebarMeta');
-  let scheme = 'gemini';
-  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
-  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
-    document.addEventListener('scroll', function(e) {
-      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
-        sidebarWrapper.classList.add('home-sidebar-fixed')
-      } else {
-        sidebarWrapper.classList.remove('home-sidebar-fixed')
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
       }
-    });
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
   }
-  </script>
-        <div class="section-box tag-line box-shadow-wrapper">
-          <section class="section tags-section posts-expand bg-color">
-            <div class="padding-wrapper">
-  <div class="tag-timeline-box">
-    <div class="tag-timeline-wrapper">
-      <div class="tag-timeline-title">
-        <h2>
-          Docker
-          <small>标签</small>
-        </h2>
-      </div>
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+        <div class="section-box box-shadow-wrapper">
+          <div class="section bg-color post post-page">
+            <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://victoryfan.github.io/post/bigdecimal-yi-ding-bu-hui-diu-shi-jing-du-ma/">
+      BigDecimal一定不会丢失精度吗？
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2020-11-17</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>7分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>1568<span class="pc-show">字数</span></span>
+    </span>
+    
+    
+    
+    <span id="/post/bigdecimal-yi-ding-bu-hui-diu-shi-jing-du-ma/" data-flag-title="BigDecimal一定不会丢失精度吗？" class="meta-item pc-show leancloud_visitors">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-eye"></i>
+      <span>浏览量：<span class="leancloud-visitors-count"></span></span>
+    </span>
+    
+  </div>
+</header>
+            <div class="post-body next-md-body" id="post_body">
+              <p>我们基本已经形成了常识，需要用到金钱的地方要用BigDecimal而不是其他，而我们也都知道浮点型变量在进行计算的时候会出现丢失精度的问题。</p>
+<p>那么，你知道其实BigDecimal也会丢失精度吗？而使用BigDecimal的背后又有什么值得去探究的地方吗?</p>
+<p>如下一段代码：</p>
+<pre><code>System.out.println(0.05 + 0.01);  
+System.out.println(1.0 - 0.42);  
+System.out.println(4.015 * 100);  
+System.out.println(123.3 / 100);  
+</code></pre>
+<p>输出：<br>
+0.060000000000000005<br>
+0.5800000000000001<br>
+401.49999999999994<br>
+1.2329999999999999</p>
+<p>可以看到在Java中进行浮点数运算的时候，会出现丢失精度的问题。那么我们如果在进行商品价格计算的时候，就会出现问题。</p>
+<p>很有可能造成我们手中有0.06元，却无法购买一个0.05元和一个0.01元的商品。</p>
+<p>因为如上所示，他们两个的总和为0.060000000000000005。</p>
+<p>这无疑是一个很严重的问题，尤其是当电商网站的并发量上去的时候，出现的问题将是巨大的。可能会导致无法下单，或者对账出现问题。所以接下来我们就可以使用Java中的BigDecimal类来解决这类问题。</p>
+<p><strong>普及一下：</strong><br>
+Java中float的精度为6-7位有效数字。double的精度为15-16位。</p>
+<p><strong>API</strong><br>
+构造器：</p>
+<pre><code>构造器                   描述
+BigDecimal(int)       创建一个具有参数所指定整数值的对象。
+BigDecimal(double)    创建一个具有参数所指定双精度值的对象。
+BigDecimal(long)      创建一个具有参数所指定长整数值的对象。
+BigDecimal(String)    创建一个具有参数所指定以字符串表示的数值的对象。
+</code></pre>
+<p>函数：</p>
+<pre><code>方法                    描述
+add(BigDecimal)       BigDecimal对象中的值相加，然后返回这个对象。
+subtract(BigDecimal)  BigDecimal对象中的值相减，然后返回这个对象。
+multiply(BigDecimal)  BigDecimal对象中的值相乘，然后返回这个对象。
+divide(BigDecimal)    BigDecimal对象中的值相除，然后返回这个对象。
+toString()            将BigDecimal对象的数值转换成字符串。
+doubleValue()         将BigDecimal对象中的值以双精度数返回。
+floatValue()          将BigDecimal对象中的值以单精度数返回。
+longValue()           将BigDecimal对象中的值以长整数返回。
+intValue()            将BigDecimal对象中的值以整数返回。
+</code></pre>
+<p>由于一般的数值类型，例如double不能准确的表示16位以上的数字。</p>
+<p><strong>BigDecimal精度也丢失</strong><br>
+我们在使用BigDecimal时，使用它的BigDecimal(String)构造器创建对象才有意义。其他的如BigDecimal b = new BigDecimal(1)这种，还是会发生精度丢失的问题。如下代码：</p>
+<pre><code>BigDecimal a = new BigDecimal(1.01);
+BigDecimal b = new BigDecimal(1.02);
+BigDecimal c = new BigDecimal(&quot;1.01&quot;);
+BigDecimal d = new BigDecimal(&quot;1.02&quot;);
+System.out.println(a.add(b));
+System.out.println(c.add(d));
+</code></pre>
+<p>输出：<br>
+2.0300000000000000266453525910037569701671600341796875<br>
+2.03</p>
+<p>可见论丢失精度BigDecimal显的更为过分。但是使用Bigdecimal的BigDecimal(String)构造器的变量在进行运算的时候却没有出现这种问题。</p>
+<p>究其原因计算机组成原理里面都有，它们的编码决定了这样的结果。</p>
+<p>long可以准确存储19位数字，而double只能准备存储16位数字。</p>
+<p>double由于有exp位，可以存16位以上的数字，但是需要以低位的不精确作为代价。如果需要高于19位数字的精确存储，则必须用BigInteger来保存，当然会牺牲一些性能。</p>
+<p>所以我们一般使用BigDecimal来解决商业运算上丢失精度的问题的时候，<strong>声明BigDecimal对象的时候一定要使用它构造参数为String的类型的构造器。</strong></p>
+<p>同时这个原则Effective Java和MySQL 必知必会中也都有提及。float和double只能用来做科学计算和工程计算。商业运算中我们要使用BigDecimal。</p>
+<p>而且我们从源码的注释中官方也给出了说明，如下是BigDecimal类的double类型参数的构造器上的一部分注释说明：</p>
+<pre><code>* The results of this constructor can be somewhat unpredictable.  
+     * One might assume that writing {@codenew BigDecimal(0.1)} in  
+     * Java creates a {@code BigDecimal} which is exactly equal to  
+     * 0.1 (an unscaled value of 1, with a scale of 1), but it is  
+     * actually equal to  
+     * 0.1000000000000000055511151231257827021181583404541015625.  
+     * This is because 0.1 cannot be represented exactly as a  
+     * {@codedouble} (or, for that matter, as a binary fraction of  
+     * any finite length).  Thus, the value that is being passed  
+     * &lt;i&gt;in&lt;/i&gt; to the constructor is not exactly equal to 0.1,  
+     * appearances notwithstanding.  
+       ……  
+        * When a {@codedouble} must be used as a source for a  
+     * {@code BigDecimal}, note that this constructor provides an  
+     * exact conversion; it does not give the same result as  
+     * converting the {@codedouble} to a {@code String} using the  
+     * {@link Double#toString(double)} method and then using the  
+     * {@link #BigDecimal(String)} constructor.  To get that result,  
+     * use the {@codestatic} {@link #valueOf(double)} method.  
+     * &lt;/ol&gt;  
+public BigDecimal(double val) {  
+    this(val,MathContext.UNLIMITED);  
+}  
+</code></pre>
+<p>第一段也说的很清楚它只能计算的无限接近这个数，但是无法精确到这个数。</p>
+<p>第二段则说，如果要想准确计算这个值，那么需要把double类型的参数转化为String类型的。并且使用BigDecimal(String)这个构造方法进行构造。去获取结果。</p>
+<p><strong>正确运用BigDecimal</strong><br>
+另外，BigDecimal所创建的是对象，我们不能使用传统的+、-、*、/等算术运算符直接对其对象进行数学运算，而必须调用其相对应的方法。方法中的参数也必须是BigDecimal的对象，由刚才我们所罗列的API也可看出。</p>
+<p>在一般开发过程中，我们数据库中存储的数据都是float和double类型的。在进行拿来拿去运算的时候还需要不断的转化，这样十分的不方便。这里我写了一个工具类：</p>
+<pre><code>public class BigDecimalUtil {  
+
+    private BigDecimalUtil() {  
+    }  
+
+    public static BigDecimal add(double v1, double v2) {// v1 + v2  
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));  
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));  
+        return b1.add(b2);  
+    }  
+
+    public static BigDecimal sub(double v1, double v2) {  
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));  
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));  
+        return b1.subtract(b2);  
+    }  
+
+    public static BigDecimal mul(double v1, double v2) {  
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));  
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));  
+        return b1.multiply(b2);  
+    }  
+
+    public static BigDecimal div(double v1, double v2) {  
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));  
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));  
+        // 2 = 保留小数点后两位   ROUND_HALF_UP = 四舍五入  
+        return b1.divide(b2, 2, BigDecimal.ROUND_HALF_UP);// 应对除不尽的情况  
+    }  
+}  
+</code></pre>
+<p>该工具类提供了double类型的基本的加减乘除运算。直接调用即可。</p>
+
+            </div>
+            <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      乌拉
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://victoryfan.github.io/post/bigdecimal-yi-ding-bu-hui-diu-shi-jing-du-ma/" title="BigDecimal一定不会丢失精度吗？">https://victoryfan.github.io/post/bigdecimal-yi-ding-bu-hui-diu-shi-jing-du-ma/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
       
+    </div>
+    <div class="nav-next">
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <a href="https://victoryfan.github.io/post/10-ge-leng-men-dan-shi-yong-de-docker-shi-yong-ji-qiao/">
-        <div class="motion-warpper">
-          <div class="tag-post-node">
-            <h1>
-              11-10
-              <small>10个冷门但实用的Docker实用技巧</small>
-            </h1>
-          </div>
-        </div>
-      </a>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+        <a class="nav-pc-next" title="GET和POST两种基本请求方法有什么区别" href="https://victoryfan.github.io/post/get-he-post-liang-chong-ji-ben-qing-qiu-fang-fa-you-shi-me-qu-bie/">GET和POST两种基本请求方法有什么区别</a>
+        <a class="nav-mobile-next" title="GET和POST两种基本请求方法有什么区别" href="https://victoryfan.github.io/post/get-he-post-liang-chong-ji-ben-qing-qiu-fang-fa-you-shi-me-qu-bie/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
 </div>
-          </section>
+            
+  <script src="https://cdn.jsdelivr.net/npm/valine@1.4.4/dist/Valine.min.js"></script>
+<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
+
+<style>
+  .v .veditor {
+    min-height: 10rem;
+    background-image: url('https://upimage.alexhchu.com/2020/04/21/47eda59424daa.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0);
+    resize: none;
+  }
+
+  .v .vwrap {
+    border: 1px solid #000 !important;
+  }
+
+  .v .vbtn {
+    padding: .4rem 1.2rem !important;
+    border-color: #fff !important;
+    background-color: #49b1f5 !important;
+    color: #fff !important;
+    font-size: .7rem !important;
+  }
+
+  .v .vcards .vcard .vh .vmeta .vat {
+    padding: 0 .8rem !important;
+    border: 1px solid #00c4b6 !important;
+    border-radius: 5px !important;
+    color: #00c4b6 !important;
+  }
+</style>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'QWaqxP0TKb13zFr2ReUdXJCd-gzGzoHsz',
+    appKey: 'lWa921deGqzI3uQtJQnXjtap',
+    avatar: '',
+    placeholder: '',
+    pageSize: '',
+    lang: 'zh-cn',
+    visitor: 'true' === 'true',
+    highlight: 'true' === 'true',
+    avatarForce: 'true' === 'true',
+  });
+</script>
+
+          </div>
         </div>
       </div>
     </div>
@@ -446,6 +723,36 @@
   // 代码高亮
   hljs.initHighlightingOnLoad();
 
+</script>
+    <div class="light-box" id="light_box"></div>
+<script>
+  let imgs = document.querySelectorAll('.post-body img');
+  let lightBox = document.querySelector('#light_box');
+  lightBox.addEventListener('mousedown', (e) => {
+    e.preventDefault()
+  })
+  lightBox.addEventListener('mousewheel', (e) => {
+    e.preventDefault()
+  })
+  let width = window.innerWidth * 0.8;
+  lightBox.onclick = () => {
+    let img = lightBox.querySelector('img');
+    lightBox.style = '';
+    img && img.remove();
+  }
+  imgs.forEach(item => {
+    item.onclick = function (e) {
+      let lightImg = document.createElement('img');
+      lightImg.src = this.src;
+      lightBox.style = `height: 100%; opacity: 1; background-color: rgba(0, 0, 0, 0.5);cursor: zoom-out;`;
+      lightImg.style = `width: ${width}px; border: 1px solid #fff; border-radius: 2px;`;
+      lightImg.onclick = function () {
+        lightBox.style = '';
+        this.remove();
+      }
+      lightBox.append(lightImg);
+    }
+  })
 </script>
   </div>
 </body>
@@ -1111,6 +1418,5 @@ ebb3f75adc59        int                            91.52%              159.5MiB 
 
 
 <script src=" /media/js/cool.js"></script>
-
 
 </html>
