@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#82c91e">
-<title>GET和POST两种基本请求方法有什么区别 | 哈拉少</title>
+<title>哈拉少</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1623303438448">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -29,8 +29,6 @@
 
 
 
-  <meta name="description" content="GET和POST两种基本请求方法有什么区别" />
-  <meta name="keywords" content="计算机网络" />
 </head>
 
 <body>
@@ -66,7 +64,7 @@
             
               
             
-            <li class="nav-item ">
+            <li class="nav-item nav-item-active">
               
               
                 <a href="/" target="_self">
@@ -158,23 +156,8 @@
     <div
       class="section-layout gemini ">
       <div class="section-layout-wrapper">
-        
-
-<div class="sidebar">
-  
-    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
-      
-        <div class="post-list-sidebar">
-          <div class="sidebar-title">
-            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
-            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
-          </div>
-        </div>
-      
-      <div class="sidebar-body gemini" id="sidebar_body">
-        
-          
-            
+        <div id="sidebarMeta" class="sidebar">
+    
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -226,95 +209,30 @@
 
 
 </div>
-          
-        
-      </div>
-    </div>
-  
 </div>
 <script>
-  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
-  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
-  const SLIDE_UP_IN = 'slide-up-in';
-
-  let sidebar = document.querySelector('#sidebar'),
-  tocSideBar = document.querySelector('#tocSideBar'),
-  metaSideBar = document.querySelector('#metaSideBar'),
-  postToc = document.querySelector('#post_toc'),
-  postSiteMeta = document.querySelector('#post_side_meta'),
-  sidebarTitle = document.querySelector('.sidebar-title'),
-  sidebarBody = document.querySelector('#sidebar_body');
-
-  tocSideBar && tocSideBar.addEventListener('click', (e) => {
-    toggleSidebar(e);
-  });
-
-  metaSideBar && metaSideBar.addEventListener('click', (e) => {
-    toggleSidebar(e);
-  });
-
-  function toggleSidebar(e) {
-    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
-    if (currentTitle == e.srcElement) {
-      return ;
-    }
-    let current, showElement, hideElement;
-    if (e.srcElement == metaSideBar) {
-      showElement = postSiteMeta;
-      hideElement = postToc;
-    } else if (e.srcElement == tocSideBar){
-      showElement = postToc;
-      hideElement = postSiteMeta;
-    }
-    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
-    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
-
-    window.Velocity(hideElement, 'stop');
-    window.Velocity(hideElement, 'transition.slideUpOut', {
-      display: 'none',
-      duration: 200,
-      complete: function () {
-        window.Velocity(showElement, 'transition.slideDownIn', {
-          duration: 200
-        });
+  let sidebarMeta = document.querySelector('#sidebarMeta');
+  let scheme = 'gemini';
+  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
+  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
+    document.addEventListener('scroll', function(e) {
+      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
+        sidebarWrapper.classList.add('home-sidebar-fixed')
+      } else {
+        sidebarWrapper.classList.remove('home-sidebar-fixed')
       }
-    })
-    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
-    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+    });
   }
-
-  postToc && postToc.addEventListener('transitionend', function() {
-    this.classList.remove(SLIDE_UP_IN);
-  });
-
-  if (sidebarBody) {
-    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
-      let hasFix = false;
-      let scrollEl = document.querySelector('.main-continer');
-      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
-      window.addEventListener('scroll', function(e) {
-        if (document.scrollingElement.scrollTop >= limitTop) {
-          if (!hasFix) {
-            sidebar.classList.add('sidebar-fixed');
-            hasFix = true;
-          }
-        } else {
-          if (hasFix) {
-            sidebar.classList.remove('sidebar-fixed');
-            hasFix = false;
-          }
-        }
-      });
-    }
-  }
-  
-</script>
-        <div class="section-box box-shadow-wrapper">
-          <div class="section bg-color post post-page">
-            <header class="post-header">
+  </script>
+        <div class="section-box gemini">
+          <section class="section  posts-expand slide-down-in">
+            
+  <article class="post-list-box  post box-shadow-wrapper">
+    <div class="article-wrapper bg-color">
+      <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://victoryfan.github.io/post/get-he-post-liang-chong-ji-ben-qing-qiu-fang-fa-you-shi-me-qu-bie/">
-      GET和POST两种基本请求方法有什么区别
+    <a class="post-title-link" href="https://victoryfan.github.io/post/hello-gridea/">
+      Hello Gridea
     </a>
   </h1>
   <div class="post-meta">
@@ -322,7 +240,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2020-11-16</span>
+      <span>2018-12-12</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -331,8 +249,8 @@
       <span class="pc-show">分类于</span>
       
       
-      <a href="https://victoryfan.github.io/tag/ROguR0ygM/">
-        <span>计算机网络</span>
+      <a href="https://victoryfan.github.io/tag/-vsyf044f/">
+        <span>Gridea</span>
       </a>
       
       
@@ -341,176 +259,65 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>6分钟</span>
+      <span>2分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>1609<span class="pc-show">字数</span></span>
-    </span>
-    
-    
-    
-    <span id="/post/get-he-post-liang-chong-ji-ben-qing-qiu-fang-fa-you-shi-me-qu-bie/" data-flag-title="GET和POST两种基本请求方法有什么区别" class="meta-item pc-show leancloud_visitors">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-eye"></i>
-      <span>浏览量：<span class="leancloud-visitors-count"></span></span>
+      <span>298<span class="pc-show">字数</span></span>
     </span>
     
   </div>
 </header>
-            <div class="post-body next-md-body" id="post_body">
-              <p>GET和POST是HTTP请求的两种基本方法，要说它们的区别，接触过WEB开发的人都能说出一二。</p>
-<p>最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数。</p>
-<p>你可能自己写过无数个GET和POST请求，或者已经看过很多权威网站总结出的他们的区别，你非常清楚知道什么时候该用什么。</p>
-<p>当你在面试中被问到这个问题，你的内心充满了自信和喜悦。<br>
-<img src="https://victoryfan.github.io/post-images/1605508999150.jpg" alt="" loading="lazy"><br>
-<strong>你轻轻松松的给出了一个“标准答案”：</strong></p>
-<ul>
-<li>GET在浏览器回退时是无害的，而POST会再次提交请求。</li>
-<li>GET产生的URL地址可以被Bookmark，而POST不可以。</li>
-<li>GET请求会被浏览器主动cache，而POST不会，除非手动设置。</li>
-<li>GET请求只能进行url编码，而POST支持多种编码方式。</li>
-<li>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。</li>
-<li>GET请求在URL中传送的参数是有长度限制的，而POST没有。</li>
-<li>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。</li>
-<li>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。</li>
-<li>GET参数通过URL传递，POST放在Request body中。<br>
-（本标准答案参考自w3schools）</li>
-</ul>
-<p>“很遗憾，这不是我们要的回答”<br>
-<img src="https://victoryfan.github.io/post-images/1605509156106.jpg" alt="" loading="lazy"></p>
-<p>如果我告诉你GET和POST本质上没有区别你信吗？<br>
-让我们扒下GET和POST的外衣，坦诚相见吧！<br>
-<img src="https://victoryfan.github.io/post-images/1605509231198.jpeg" alt="" loading="lazy"></p>
-<p>GET和POST是什么？HTTP协议中的两种发送请求的方法。</p>
-<p><strong>HTTP是什么？HTTP是基于TCP/IP的关于数据在万维网中如何通信的协议。</strong><br>
-HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。<br>
-<strong>那么，“标准答案”里的那些区别是怎么回事？</strong><br>
-<img src="https://victoryfan.github.io/post-images/1605509461242.jpg" alt="" loading="lazy"><br>
-在我大万维网世界中，TCP就像汽车，我们用TCP来运输数据，它很可靠，从来不会发生丢件少件的现象。</p>
-<p>但是如果路上跑的全是看起来一模一样的汽车，那这个世界看起来是一团混乱，送急件的汽车可能被前面满载货物的汽车拦堵在路上，整个交通系统一定会瘫痪。为了避免这种情况发生，交通规则HTTP诞生了。</p>
-<p>HTTP给汽车运输设定了好几个服务类别，有GET, POST, PUT, DELETE等等，HTTP规定，当执行GET请求的时候，要给汽车贴上GET的标签（设置method为GET），而且要求把传送的数据放在车顶上（url中）以方便记录。</p>
-<p>如果是POST请求，就要在车上贴上POST的标签，并把货物放在车厢里。当然，你也可以在GET的时候往车厢内偷偷藏点货物，但是这是很不光彩；也可以在POST的时候在车顶上也放一些数据，让人觉得傻乎乎的。</p>
-<p><strong>HTTP只是个行为准则，而TCP才是GET和POST怎么实现的基本。</strong><br>
-但是，我们只看到HTTP对GET和POST参数的传送渠道（url还是requrest body）提出了要求。“标准答案”里关于参数大小的限制又是从哪来的呢？<br>
-<img src="https://victoryfan.github.io/post-images/1605509671801.jpg" alt="" loading="lazy"></p>
-<p>在我大万维网世界中，还有另一个重要的角色：运输公司。</p>
-<p>不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。虽然理论上，你可以在车顶上无限的堆货物（url中无限加参数）。</p>
-<p>但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的部分，恕不处理。</p>
-<p>如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。</p>
-<p><strong>好了，现在你知道，GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。</strong><br>
-<img src="https://victoryfan.github.io/post-images/1605509829107.jpg" alt="" loading="lazy"></p>
-<p><strong>真正的大BOSS还没出场呢。。。</strong></p>
-<p>这位BOSS有多神秘？当你试图在网上找“GET和POST的区别”的时候，那些你会看到的搜索结果里，从没有提到他。他究竟是什么呢...</p>
-<p><strong>GET和POST还有一个重大区别：</strong><br>
-<strong>简单的说：GET产生一个TCP数据包；POST产生两个TCP数据包。</strong></p>
-<p>长的说：对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；</p>
-<p>而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p>
-<p>也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开门迎接我”，然后再回头把货送过去。</p>
-<p>因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。</p>
-<p><strong>JJ但这是一个坑！跳入需谨慎。为什么？</strong><br>
-<img src="https://victoryfan.github.io/post-images/1605510312196.jpg" alt="" loading="lazy"></p>
-<ol>
-<li>GET与POST都有自己的语义，不能随便混用。</li>
-<li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li>
-<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。</li>
-</ol>
-<p>现在，当面试官再问你“GET与POST的区别”的时候，你的内心是不是开始装逼了？不过要小心被打<br>
-<img src="https://victoryfan.github.io/post-images/1605510454726.jpeg" alt="" loading="lazy"></p>
-<p>引自：</p>
-<blockquote>
-<p><a href="https://mp.weixin.qq.com/s/D36Yj_OjTLc3QURVMaEtjA">https://mp.weixin.qq.com/s/D36Yj_OjTLc3QURVMaEtjA</a></p>
-</blockquote>
+      <div class="post-body">
+        
+        
+          <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
 
-            </div>
-            <div class="post-footer">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-      <strong>本文作者：</strong>
-      乌拉
-    </li>
-    <li class="post-copyright-link">
-      <strong>本文链接：</strong>
-      <a href="https://victoryfan.github.io/post/get-he-post-liang-chong-ji-ben-qing-qiu-fang-fa-you-shi-me-qu-bie/" title="GET和POST两种基本请求方法有什么区别">https://victoryfan.github.io/post/get-he-post-liang-chong-ji-ben-qing-qiu-fang-fa-you-shi-me-qu-bie/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明： </strong>
-      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
-    </li>
-  </ul>
-  <div class="tags">
-    
-      <a href="https://victoryfan.github.io/tag/ROguR0ygM/"># 计算机网络</a>
-    
-  </div>
-  <div class="nav">
-    <div class="nav-prev">
-      
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="BigDecimal一定不会丢失精度吗？" href="https://victoryfan.github.io/post/bigdecimal-yi-ding-bu-hui-diu-shi-jing-du-ma/">BigDecimal一定不会丢失精度吗？</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="BigDecimal一定不会丢失精度吗？" href="https://victoryfan.github.io/post/bigdecimal-yi-ding-bu-hui-diu-shi-jing-du-ma/">上一篇</a>
+        
+        
+        <div class="post-button text-center">
+          <a class="btn" href="https://victoryfan.github.io/post/hello-gridea/" rel="contents">
+            阅读全文 »
+          </a>
+        </div>
+        
+      </div>
       
     </div>
-    <div class="nav-next">
-      
-        <a class="nav-pc-next" title="TCP三次四次握手" href="https://victoryfan.github.io/post/tcp-san-ci-si-ci-wo-shou/">TCP三次四次握手</a>
-        <a class="nav-mobile-next" title="TCP三次四次握手" href="https://victoryfan.github.io/post/tcp-san-ci-si-ci-wo-shou/">下一篇</a>
-        <i class="fa fa-chevron-right"></i>
-      
-    </div>
-  </div>
-</div>
+  </article>
+  
             
-  <script src="https://cdn.jsdelivr.net/npm/valine@1.4.4/dist/Valine.min.js"></script>
-<div id="vcomments" style="padding: 10px 0px 0px 0px"></div>
-
-<style>
-  .v .veditor {
-    min-height: 10rem;
-    background-image: url('https://upimage.alexhchu.com/2020/04/21/47eda59424daa.gif');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: right;
-    background-color: rgba(255, 255, 255, 0);
-    resize: none;
-  }
-
-  .v .vwrap {
-    border: 1px solid #000 !important;
-  }
-
-  .v .vbtn {
-    padding: .4rem 1.2rem !important;
-    border-color: #fff !important;
-    background-color: #49b1f5 !important;
-    color: #fff !important;
-    font-size: .7rem !important;
-  }
-
-  .v .vcards .vcard .vh .vmeta .vat {
-    padding: 0 .8rem !important;
-    border: 1px solid #00c4b6 !important;
-    border-radius: 5px !important;
-    color: #00c4b6 !important;
-  }
-</style>
-<script>
-  new Valine({
-    el: '#vcomments',
-    appId: 'QWaqxP0TKb13zFr2ReUdXJCd-gzGzoHsz',
-    appKey: 'lWa921deGqzI3uQtJQnXjtap',
-    avatar: '',
-    placeholder: '',
-    pageSize: '',
-    lang: 'zh-cn',
-    visitor: 'true' === 'true',
-    highlight: 'true' === 'true',
-    avatarForce: 'true' === 'true',
-  });
-</script>
-
-          </div>
+            
+<div class="page bg-color">
+  <ul class="pagination-ul">
+    
+      <li class="pagination-dir">
+        <a href="https://victoryfan.github.io/">
+          <i class="fa fa-angle-left"></i>
+        </a>
+      </li>
+    
+    
+      
+        <li class="pagination-li ">
+            <a href="/page/../">
+              1
+            </a>
+        </li>
+      
+        <li class="pagination-li pagination-active">
+            <a href="/page/2">
+              2
+            </a>
+        </li>
+      
+    
+    
+  </ul>
+</div>
+          </section>
         </div>
       </div>
     </div>
@@ -1950,5 +1757,6 @@ ebb3f75adc59        int                            91.52%              159.5MiB 
 
 
 <script src=" /media/js/cool.js"></script>
+
 
 </html>

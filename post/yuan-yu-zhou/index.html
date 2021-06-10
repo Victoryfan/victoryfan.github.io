@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#82c91e">
-<title>GET和POST两种基本请求方法有什么区别 | 哈拉少</title>
+<title>元宇宙 | 哈拉少</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1623303438448">
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="stylesheet" href="/media/css/gemini.css">
@@ -29,8 +29,8 @@
 
 
 
-  <meta name="description" content="GET和POST两种基本请求方法有什么区别" />
-  <meta name="keywords" content="计算机网络" />
+  <meta name="description" content="元宇宙" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -174,7 +174,8 @@
       <div class="sidebar-body gemini" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -226,6 +227,195 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%85%83%E5%AE%87%E5%AE%99%E9%9C%80%E8%A6%81%E7%9A%84%E5%B1%9E%E6%80%A7">元宇宙需要的属性：</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -313,8 +503,8 @@
           <div class="section bg-color post post-page">
             <header class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://victoryfan.github.io/post/get-he-post-liang-chong-ji-ben-qing-qiu-fang-fa-you-shi-me-qu-bie/">
-      GET和POST两种基本请求方法有什么区别
+    <a class="post-title-link" href="https://victoryfan.github.io/post/yuan-yu-zhou/">
+      元宇宙
     </a>
   </h1>
   <div class="post-meta">
@@ -322,36 +512,23 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span>发布于</span>
-      <span>2020-11-16</span>
+      <span>2021-06-10</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show">分类于</span>
-      
-      
-      <a href="https://victoryfan.github.io/tag/ROguR0ygM/">
-        <span>计算机网络</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>6分钟</span>
+      <span>1分钟</span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>1609<span class="pc-show">字数</span></span>
+      <span>273<span class="pc-show">字数</span></span>
     </span>
     
     
     
-    <span id="/post/get-he-post-liang-chong-ji-ben-qing-qiu-fang-fa-you-shi-me-qu-bie/" data-flag-title="GET和POST两种基本请求方法有什么区别" class="meta-item pc-show leancloud_visitors">
+    <span id="/post/yuan-yu-zhou/" data-flag-title="元宇宙" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span>浏览量：<span class="leancloud-visitors-count"></span></span>
@@ -360,68 +537,16 @@
   </div>
 </header>
             <div class="post-body next-md-body" id="post_body">
-              <p>GET和POST是HTTP请求的两种基本方法，要说它们的区别，接触过WEB开发的人都能说出一二。</p>
-<p>最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数。</p>
-<p>你可能自己写过无数个GET和POST请求，或者已经看过很多权威网站总结出的他们的区别，你非常清楚知道什么时候该用什么。</p>
-<p>当你在面试中被问到这个问题，你的内心充满了自信和喜悦。<br>
-<img src="https://victoryfan.github.io/post-images/1605508999150.jpg" alt="" loading="lazy"><br>
-<strong>你轻轻松松的给出了一个“标准答案”：</strong></p>
-<ul>
-<li>GET在浏览器回退时是无害的，而POST会再次提交请求。</li>
-<li>GET产生的URL地址可以被Bookmark，而POST不可以。</li>
-<li>GET请求会被浏览器主动cache，而POST不会，除非手动设置。</li>
-<li>GET请求只能进行url编码，而POST支持多种编码方式。</li>
-<li>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。</li>
-<li>GET请求在URL中传送的参数是有长度限制的，而POST没有。</li>
-<li>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。</li>
-<li>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。</li>
-<li>GET参数通过URL传递，POST放在Request body中。<br>
-（本标准答案参考自w3schools）</li>
-</ul>
-<p>“很遗憾，这不是我们要的回答”<br>
-<img src="https://victoryfan.github.io/post-images/1605509156106.jpg" alt="" loading="lazy"></p>
-<p>如果我告诉你GET和POST本质上没有区别你信吗？<br>
-让我们扒下GET和POST的外衣，坦诚相见吧！<br>
-<img src="https://victoryfan.github.io/post-images/1605509231198.jpeg" alt="" loading="lazy"></p>
-<p>GET和POST是什么？HTTP协议中的两种发送请求的方法。</p>
-<p><strong>HTTP是什么？HTTP是基于TCP/IP的关于数据在万维网中如何通信的协议。</strong><br>
-HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。<br>
-<strong>那么，“标准答案”里的那些区别是怎么回事？</strong><br>
-<img src="https://victoryfan.github.io/post-images/1605509461242.jpg" alt="" loading="lazy"><br>
-在我大万维网世界中，TCP就像汽车，我们用TCP来运输数据，它很可靠，从来不会发生丢件少件的现象。</p>
-<p>但是如果路上跑的全是看起来一模一样的汽车，那这个世界看起来是一团混乱，送急件的汽车可能被前面满载货物的汽车拦堵在路上，整个交通系统一定会瘫痪。为了避免这种情况发生，交通规则HTTP诞生了。</p>
-<p>HTTP给汽车运输设定了好几个服务类别，有GET, POST, PUT, DELETE等等，HTTP规定，当执行GET请求的时候，要给汽车贴上GET的标签（设置method为GET），而且要求把传送的数据放在车顶上（url中）以方便记录。</p>
-<p>如果是POST请求，就要在车上贴上POST的标签，并把货物放在车厢里。当然，你也可以在GET的时候往车厢内偷偷藏点货物，但是这是很不光彩；也可以在POST的时候在车顶上也放一些数据，让人觉得傻乎乎的。</p>
-<p><strong>HTTP只是个行为准则，而TCP才是GET和POST怎么实现的基本。</strong><br>
-但是，我们只看到HTTP对GET和POST参数的传送渠道（url还是requrest body）提出了要求。“标准答案”里关于参数大小的限制又是从哪来的呢？<br>
-<img src="https://victoryfan.github.io/post-images/1605509671801.jpg" alt="" loading="lazy"></p>
-<p>在我大万维网世界中，还有另一个重要的角色：运输公司。</p>
-<p>不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。虽然理论上，你可以在车顶上无限的堆货物（url中无限加参数）。</p>
-<p>但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的部分，恕不处理。</p>
-<p>如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。</p>
-<p><strong>好了，现在你知道，GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。</strong><br>
-<img src="https://victoryfan.github.io/post-images/1605509829107.jpg" alt="" loading="lazy"></p>
-<p><strong>真正的大BOSS还没出场呢。。。</strong></p>
-<p>这位BOSS有多神秘？当你试图在网上找“GET和POST的区别”的时候，那些你会看到的搜索结果里，从没有提到他。他究竟是什么呢...</p>
-<p><strong>GET和POST还有一个重大区别：</strong><br>
-<strong>简单的说：GET产生一个TCP数据包；POST产生两个TCP数据包。</strong></p>
-<p>长的说：对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；</p>
-<p>而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p>
-<p>也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开门迎接我”，然后再回头把货送过去。</p>
-<p>因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。</p>
-<p><strong>JJ但这是一个坑！跳入需谨慎。为什么？</strong><br>
-<img src="https://victoryfan.github.io/post-images/1605510312196.jpg" alt="" loading="lazy"></p>
-<ol>
-<li>GET与POST都有自己的语义，不能随便混用。</li>
-<li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li>
-<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。</li>
-</ol>
-<p>现在，当面试官再问你“GET与POST的区别”的时候，你的内心是不是开始装逼了？不过要小心被打<br>
-<img src="https://victoryfan.github.io/post-images/1605510454726.jpeg" alt="" loading="lazy"></p>
-<p>引自：</p>
-<blockquote>
-<p><a href="https://mp.weixin.qq.com/s/D36Yj_OjTLc3QURVMaEtjA">https://mp.weixin.qq.com/s/D36Yj_OjTLc3QURVMaEtjA</a></p>
-</blockquote>
+              <h2 id="元宇宙需要的属性">元宇宙需要的属性：</h2>
+<p>身份：你拥有一个虚拟身份，无论与现实身份有没有相关性。</p>
+<p>朋友：你在元宇宙当中拥有朋友，可以社交，无论在现实中是否认识。</p>
+<p>沉浸感：你能够沉浸在元宇宙的体验中，忽略其他的一切。</p>
+<p>低延迟：元宇宙中的一切都是同步发生的，没有异步性或延迟性。</p>
+<p>多元化：元宇宙提供多种丰富内容，包括玩法、道具、美术素材等。</p>
+<p>随意：你可以使用任何设备登陆元宇宙，随时随地沉浸其中。</p>
+<p>经济系统：与任何复杂的大型游戏一样，元宇宙应该拥有自己的经济系统。</p>
+<p>文明：元宇宙应该是一种虚拟文明。</p>
+<p>你可以把他理解成游戏，也可以理解成虚拟现实，需要用到的技术是VR、区块链、边缘计算、人工智能等等，未来更多游戏公司应该会走向这条路（我觉得模拟城市可以率先搞起来）。</p>
 
             </div>
             <div class="post-footer">
@@ -432,7 +557,7 @@ HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://victoryfan.github.io/post/get-he-post-liang-chong-ji-ben-qing-qiu-fang-fa-you-shi-me-qu-bie/" title="GET和POST两种基本请求方法有什么区别">https://victoryfan.github.io/post/get-he-post-liang-chong-ji-ben-qing-qiu-fang-fa-you-shi-me-qu-bie/</a>
+      <a href="https://victoryfan.github.io/post/yuan-yu-zhou/" title="元宇宙">https://victoryfan.github.io/post/yuan-yu-zhou/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -441,21 +566,15 @@ HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，
   </ul>
   <div class="tags">
     
-      <a href="https://victoryfan.github.io/tag/ROguR0ygM/"># 计算机网络</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="BigDecimal一定不会丢失精度吗？" href="https://victoryfan.github.io/post/bigdecimal-yi-ding-bu-hui-diu-shi-jing-du-ma/">BigDecimal一定不会丢失精度吗？</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="BigDecimal一定不会丢失精度吗？" href="https://victoryfan.github.io/post/bigdecimal-yi-ding-bu-hui-diu-shi-jing-du-ma/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="TCP三次四次握手" href="https://victoryfan.github.io/post/tcp-san-ci-si-ci-wo-shou/">TCP三次四次握手</a>
-        <a class="nav-mobile-next" title="TCP三次四次握手" href="https://victoryfan.github.io/post/tcp-san-ci-si-ci-wo-shou/">下一篇</a>
+        <a class="nav-pc-next" title="缓存理解" href="https://victoryfan.github.io/post/huan-cun-li-jie/">缓存理解</a>
+        <a class="nav-mobile-next" title="缓存理解" href="https://victoryfan.github.io/post/huan-cun-li-jie/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
